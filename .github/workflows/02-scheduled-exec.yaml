@@ -1,0 +1,43 @@
+# CI de nível 01 - disparo manual a partir de um clique
+
+# nome do nosso pipeline
+name: 'Execução Manual'
+
+# regras de disparos (gatilho/triggers)
+# gatilho de exec manual = workflow_dispatch
+on:
+  schedule: # execução agendada - possui 5 parametros a-minuto b-hora c-dia d-mes e-dia da semana
+    # o asterisco significa rodar todos os períodos
+    - cron: '*/5 * * * *' #nesse exemplo, executa a cada 5 minutos
+
+# trabalho/tarefas que são feitos dentro dos pipelines = jobs
+jobs: 
+  e2e-tests:
+    # máquina que o job vai executar
+    runs-on: ubuntu-latest
+
+    # passo a passo do job
+    steps:
+      # clone do projeto
+      - uses: actions/checkout@v4
+
+      # instalação do node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
+      # instalação do yarn
+      - name: Instalando Yarn
+        run: npm install -g yarn
+
+      # instalação das dependências    
+      - name: Instalando Dependências
+        run: yarn install
+
+      # instalação do Playwright
+      - name: Instalando Playwright
+        run: yarn playwright install
+
+      # execução dos testes e2e
+      - name: Execução dos Testes E2E
+        run: yarn run e2e
