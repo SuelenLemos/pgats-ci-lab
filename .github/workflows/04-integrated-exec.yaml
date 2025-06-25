@@ -31,7 +31,7 @@ jobs:
         run: yarn install
 
       - name: Executando teste de unidade
-        run: yarn teste
+        run: yarn test
 
   e2e-tests:
     runs-on: ubuntu-latest
