@@ -8,13 +8,13 @@ name: 'Execução por Deploy'
 # gatilho de exec agendada = schedule
 # gatilho de exec a partir de outro pipe = workflow_run   workflow_dispatch
 on:
-  workflow_run: 
-    workflows: ["Execução Manual"]
-    types: 
+  workflow_run:
+    workflows: ['Execução Manual']
+    types:
       - completed
 
 # trabalho/tarefas que são feitos dentro dos pipelines = jobs
-jobs: 
+jobs:
   e2e-tests:
     # máquina que o job vai executar
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
       - name: Instalando Yarn
         run: npm install -g yarn
 
-      # instalação das dependências    
+      # instalação das dependências
       - name: Instalando Dependências
         run: yarn install
 
@@ -48,7 +48,7 @@ jobs:
       # execução dos testes e2e
       - name: Execução dos Testes E2E
         run: yarn run e2e
-      
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

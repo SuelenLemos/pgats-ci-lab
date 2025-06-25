@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 # trabalho/tarefas que são feitos dentro dos pipelines = jobs
-jobs: 
+jobs:
   e2e-tests:
     # máquina que o job vai executar
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
       - name: Instalando Yarn
         run: npm install -g yarn
 
-      # instalação das dependências    
+      # instalação das dependências
       - name: Instalando Dependências
         run: yarn install
 
